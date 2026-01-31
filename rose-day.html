@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Rose Day 🌹</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Quicksand:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFB6C1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background hearts */
+        body::before {
+            content: '💕';
+            position: absolute;
+            font-size: 3rem;
+            animation: float 6s ease-in-out infinite;
+            top: 10%;
+            left: 10%;
+            opacity: 0.3;
+        }
+
+        body::after {
+            content: '🌹';
+            position: absolute;
+            font-size: 2.5rem;
+            animation: float 8s ease-in-out infinite;
+            top: 70%;
+            right: 15%;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(199, 21, 133, 0.3);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 192, 203, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Alex Brush', cursive;
+            color: #C71585;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(199, 21, 133, 0.2);
+            font-weight: 400;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            color: #DB7093;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #C71585;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .image-container {
+            margin: 30px auto;
+            max-width: 250px;
+        }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .quote {
+            font-size: 1.3rem;
+            color: #C71585;
+            font-style: italic;
+            margin: 30px 0;
+            line-height: 1.8;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFE4E9 0%, #FFF0F5 100%);
+            border-radius: 15px;
+            border-left: 5px solid #DB7093;
+            font-weight: 600;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #DB7093 0%, #C71585 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(199, 21, 133, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(199, 21, 133, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Stage 2: Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+
+        .photo-frame {
+            aspect-ratio: 1;
+            border: 8px solid #FFB6C1;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E9 100%);
+            box-shadow: 0 5px 15px rgba(199, 21, 133, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-instruction {
+            font-size: 1rem;
+            color: #C71585;
+            margin-top: 20px;
+            font-weight: 700;
+        }
+
+        .photo-frame::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Stage 3: Pick a Rose */
+        .roses-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .rose {
+            font-size: 5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 5px 10px rgba(199, 21, 133, 0.3));
+        }
+
+        .rose:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .rose-message {
+            font-size: 1.2rem;
+            color: #C71585;
+            margin-top: 20px;
+            min-height: 30px;
+            font-weight: 700;
+        }
+
+        /* Stage 4: Letter */
+        .letter {
+            background: linear-gradient(135deg, #FFF9FB 0%, #FFF0F5 100%);
+            border: 3px solid #FFB6C1;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(199, 21, 133, 0.2);
+            position: relative;
+        }
+
+        .letter::before {
+            content: '💌';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 2.5rem;
+        }
+
+        .letter-content {
+            font-size: 1.2rem;
+            color: #C71585;
+            line-height: 2;
+            text-align: left;
+            font-weight: 400;
+        }
+
+        /* Stage 5: Finale */
+        .finale-text {
+            font-size: 1.4rem;
+            color: #C71585;
+            margin: 30px 0;
+            line-height: 2;
+            font-weight: 600;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-heart {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: float-up-button 2s ease-out forwards;
+        }
+
+        @keyframes float-up-button {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-150px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #C71585;
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .quote, .finale-text {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            .rose {
+                font-size: 3.5rem;
+            }
+
+            .letter-content {
+                font-size: 1rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Stage 1: The Greeting :https//s3.getstickerpack.com/storage/uploads/sticker-pack/tatlis-kedy/sticker_1.gif?fd494d6ad6bfc04adb82152f83ce0ff1   -->
+        <div id="stage1" class="section active">
+            <h1>Happy Rose Day Baby!!</h1>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/rose.gif" alt="Kid with Rose">
+            </div>
+            <div class="quote">
+                "A rose speaks of love silently, in a language known only to the heart. 🌹"
+            </div>
+            <button class="btn" onclick="showStage(2)">Open Message</button>
+        </div>
+
+        <!-- Stage 2: The Gallery -->
+        <div id="stage2" class="section">
+            <h1>Our Memories</h1>
+            <h2>Captured Moments Together</h2>
+            <div class="gallery">
+                <div class="photo-frame">
+                    <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/archit1.jpeg" alt="Memory 1">
+                </div>
+                <div class="photo-frame">
+                    <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/archit2.jpeg" alt="Memory 2">
+                </div>
+                <div class="photo-frame">
+                    <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/archit3.jpeg" alt="Memory 3">
+                </div>
+                <div class="photo-frame">
+                    <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/archit4.jpeg" alt="Memory 4">
+                </div>
+                <div class="photo-frame">
+                    <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/archit5.jpeg" alt="Memory 5">
+                </div>
+                <div class="photo-frame">
+                    <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/archit6.jpeg" alt="Memory 6">
+                </div>
+            </div>
+            <button class="btn" onclick="showStage(3)">Pick a Gift</button>
+        </div>
+
+        <!-- Stage 3: The Game (Pick a Rose) -->
+        <div id="stage3" class="section">
+            <h1>Pick a Rose</h1>
+            <h2>Choose the one that speaks to your heart</h2>
+            <div class="roses-container">
+                <div class="rose" onclick="pickRose(1)">🌹</div>
+                <div class="rose" onclick="pickRose(2)">🌹</div>
+                <div class="rose" onclick="pickRose(3)">🌹</div>
+            </div>
+            <div class="rose-message" id="roseMessage"></div>
+        </div>
+
+        <!-- Stage 4: The Letter -->
+        <div id="stage4" class="section">
+            <h1>From My Heart</h1>
+            <div class="letter">
+                <div class="letter-content">
+                    My Dearest,<br><br>
+                    
+                    On this beautiful Rose Day, I want you to know that you are the most precious rose in the garden of my life. Your presence brings color to my days and fragrance to my moments.<br><br>
+                    
+                    Just like a rose, you are beautiful, delicate, and irreplaceable. Every petal of this rose represents a reason why I cherish you. Your smile is brighter than the morning sun, and your love is deeper than the ocean.<br><br>
+                    
+                    Thank you for being the sweetest part of my life. You make every day feel like a celebration of love.<br><br>
+                    
+                    With all my love,<br>
+                    Forever Yours 💕
+                </div>
+            </div>
+            <button class="btn" onclick="showStage(5)">One Final Note</button>
+        </div>
+
+        <!-- Stage 5: The Finale -->
+        <div id="stage5" class="section">
+            <h1>I Love You</h1>
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/Sheth3433/demo/refs/heads/main/kiss.gif" alt="Cat Flying Kiss">
+            </div>
+            <div class="finale-text">
+                You are my today and all of my tomorrows.<br>
+                You didn’t just enter my life — you changed the way my heart understands love.<br>
+                Happy Rose Day, my bachha! 🌹💕<br><br>
+                May our love bloom forever like the most beautiful rose.
+            </div>
+            <button class="btn" onclick="celebrate()">Happy Rose Day Once Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts on button click
+        function createFloatingHearts(event) {
+            const heartsCount = 8;
+            const button = event.target;
+            const rect = button.getBoundingClientRect();
+            const buttonX = rect.left + rect.width / 2;
+            const buttonY = rect.top + rect.height / 2;
+
+            for (let i = 0; i < heartsCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = '💕';
+                heart.style.left = buttonX + 'px';
+                heart.style.top = buttonY + 'px';
+                heart.style.animationDelay = (i * 0.1) + 's';
+                
+                // Random horizontal spread
+                const randomX = (Math.random() - 0.5) * 100;
+                heart.style.transform = `translateX(${randomX}px)`;
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
+            }
+        }
+
+        // Add click event to all buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', createFloatingHearts);
+            });
+        });
+
+        function showStage(stageNumber) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected stage
+            document.getElementById('stage' + stageNumber).classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function pickRose(roseNumber) {
+            const messageElement = document.getElementById('roseMessage');
+            
+            if (roseNumber === 1) {
+                messageElement.textContent = "This one is pretty, but try another! 💕";
+                messageElement.style.color = "#DB7093";
+            } else if (roseNumber === 2) {
+                messageElement.textContent = "You found it! Opening a letter... 💌";
+                messageElement.style.color = "#C71585";
+                
+                // Wait 1.5 seconds then move to stage 4
+                setTimeout(() => {
+                    showStage(4);
+                }, 1500);
+            } else if (roseNumber === 3) {
+                messageElement.textContent = "Nice try, but pick another! 🌹";
+                messageElement.style.color = "#DB7093";
+            }
+        }
+
+        function celebrate() {
+            createConfetti();
+            
+            // Reset to stage 1 after confetti
+            setTimeout(() => {
+                showStage(1);
+            }, 3000);
+        }
+
+        function createConfetti() {
+            const colors = ['#C71585', '#DB7093', '#FFB6C1', '#FFC0CB'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 30);
+            }
+        }
+
+        // Add floating hearts periodically
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.textContent = Math.random() > 0.5 ? '💕' : '🌹';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.bottom = '-50px';
+            heart.style.fontSize = '2rem';
+            heart.style.opacity = '0.4';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '0';
+            
+            // Use CSS animation
+            heart.style.animation = 'float-up 5s ease-in forwards';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }, 3000);
+    </script>
+</body>
+</html>
